@@ -1,0 +1,16 @@
+#@title  Sprawdź historyczny kurs waluty  {"run": "auto"}
+
+from requests import get
+
+code = "EUR" #@param ["USD", "EUR", "CHF"]
+date = "2022-10-25" #@param {type:"date"}
+
+url = f'http://api.nbp.pl/api/exchangerates/rates/a/{code}/{date}/'
+
+resp = get(url)
+data = resp.json()
+print(data['rates'][0]['mid'])
+
+exchange_rate = data['rates'][0]['mid']
+
+print(f'1 {code} = {exchange_rate} PLN w dniu {date}')
